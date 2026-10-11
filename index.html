@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#527b66">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Sensei Attend">
+<meta name="description" content="Aplikasi comel dan ringkas untuk rekod kehadiran kelas.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/sensei-192.png">
+<title>Sensei Attendance</title>
+<style>
+:root{--ink:#20352b;--muted:#6d7c72;--sage:#426b57;--sage2:#e6eee6;--cream:#faf8f1;--line:#e1e7df;--white:#fff;--red:#b64d4d;--amber:#a76d1c;--blue:#426b8b;--shadow:0 8px 28px rgba(32,53,43,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:650}.primary{background:var(--sage);color:white}.soft{background:var(--sage2);color:var(--sage)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0ef;color:var(--red)}.tiny{padding:7px 10px;font-size:13px}.app{max-width:1100px;margin:auto;padding:18px 16px 42px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;background:var(--sage2);color:var(--sage);display:grid;place-items:center;border-radius:15px;font-size:23px}.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{font-size:12px;color:var(--sage);background:var(--sage2);border-radius:99px;padding:7px 10px;white-space:nowrap}.nav{display:flex;gap:8px;overflow:auto;margin-bottom:18px;padding-bottom:3px}.nav button{white-space:nowrap;background:transparent;color:var(--muted)}.nav button.active{background:var(--sage);color:white}.panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{background:#f7faf6;border:1px solid var(--line);padding:15px;border-radius:16px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:7px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.spread{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}.field label{font-size:12px;font-weight:700;color:var(--muted)}input,select{width:100%;min-width:0;background:white;border:1px solid #d9e1d8;border-radius:11px;padding:11px 12px;color:var(--ink)}h2{font-size:19px;margin:0 0 6px}h3{font-size:15px;margin:0 0 12px}.sub{color:var(--muted);font-size:13px;margin:0 0 15px;line-height:1.5}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.list{display:flex;flex-direction:column;gap:8px}.student{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.avatar{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--sage2);color:var(--sage);font-weight:800;flex-shrink:0}.student-name{flex:1;min-width:0}.student-name strong{display:block;overflow-wrap:anywhere}.student-name small{color:var(--muted)}.statuses{display:flex;gap:5px;flex-wrap:wrap}.status{border:1px solid var(--line);padding:8px 10px;border-radius:10px;background:white;color:var(--muted);font-size:12px}.status.selected.present{background:#e5f4e9;border-color:#b8dfc3;color:#24643a}.status.selected.absent{background:#ffeded;border-color:#f0c1c1;color:#a43737}.status.selected.late{background:#fff3dc;border-color:#f1d39b;color:#8b5b13}.status.selected.excused{background:#eaf2fa;border-color:#c4d8ed;color:#315d84}.status.selected.unmarked{background:#eee;border-color:#bbb;color:#444}.hidden{display:none!important}.notice{padding:12px 14px;background:#fff6df;border:1px solid #f0dca6;border-radius:13px;color:#76551a;font-size:13px;line-height:1.5}.empty{text-align:center;padding:30px 12px;color:var(--muted)}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.tag{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;background:var(--sage2);color:var(--sage)}.actions{display:flex;gap:6px;flex-wrap:wrap}.section{display:none}.section.active{display:block}.footer{font-size:12px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.6}.bar{height:7px;background:#edf0eb;border-radius:9px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:var(--sage)}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#20352b;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:10;font-size:14px;max-width:90vw}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:1fr 1fr}.panel{padding:14px}.brand h1{font-size:19px}.top{align-items:flex-start}.pill{display:none}.student{align-items:flex-start;flex-wrap:wrap}.student-name{min-width:calc(100% - 58px)}.statuses{width:100%;padding-left:50px}.status{flex:1;min-width:62px;text-align:center;padding:9px 4px}.top .primary{padding:10px;font-size:12px}}
+@media print{body{background:white}.nav,.top button,.actions,.status,.no-print,.footer{display:none!important}.panel{box-shadow:none;break-inside:avoid}.section{display:none!important}#reportSection{display:block!important}.app{max-width:none;padding:0}}
+
+/* Sensei's soft-sage cute theme */
+:root{
+ --ink:#263d32;--muted:#718176;--sage:#527b66;--sage2:#e5efe6;
+ --cream:#fffaf0;--line:#e6e6d9;--white:#fffefa;--red:#b64d4d;
+ --amber:#a76d1c;--blue:#426b8b;--shadow:0 9px 28px rgba(56,83,64,.09);
+}
+body{background:radial-gradient(circle at 8% 4%,#f4e8bf 0,transparent 17rem),radial-gradient(circle at 95% 16%,#e5efe6 0,transparent 18rem),var(--cream);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:1000px;padding:20px 15px 42px}
+.top{padding:15px 17px;background:rgba(255,254,250,.88);border:1px solid #e9e8db;border-radius:24px;box-shadow:var(--shadow);margin-bottom:15px}
+.logo{width:52px;height:52px;background:#e5efe6;color:#527b66;border-radius:18px;font-size:25px;box-shadow:inset 0 -3px 0 rgba(82,123,102,.08)}
+.brand h1{font-size:clamp(19px,3vw,24px);letter-spacing:-.5px}
+.brand p{font-size:12px}
+.pill{background:#fff0c9;color:#8a6723;border:1px solid #f1dfaa}
+.nav{gap:7px;padding:5px;background:#f0f0e6;border-radius:17px;margin-bottom:17px}
+.nav button{border-radius:13px;padding:11px 13px}
+.nav button.active{background:#527b66;box-shadow:0 4px 10px rgba(82,123,102,.18)}
+.panel{background:rgba(255,254,250,.96);border-color:#e9e8db;border-radius:23px;padding:19px;box-shadow:var(--shadow)}
+h2{letter-spacing:-.25px}
+h2:before{content:"✿";color:#d2a94c;margin-right:8px;font-size:15px}
+h3{letter-spacing:-.15px}
+.sub{line-height:1.55}
+button{transition:transform .12s ease,box-shadow .12s ease;border-radius:13px}
+button:active{transform:scale(.98)}
+.primary{background:#527b66;box-shadow:0 4px 0 #3f6551}
+.soft{background:#e5efe6;color:#426b57}
+.outline{background:#fffefa;border-color:#e2e5d9}
+.stat{background:linear-gradient(145deg,#f7fbf5,#fff7e6);border-radius:18px}
+.student{background:#fffefa;border-color:#e9e8db;border-radius:17px;padding:13px}
+.student:nth-child(even){background:#fcfcf5}
+.avatar{border-radius:14px;background:#f4e8bf;color:#7e672e}
+.status{border-radius:12px}
+input,select{border-color:#e0e4d8;border-radius:13px;background:#fffefa;min-height:43px}
+.notice{background:#fff4d9;border-color:#f0dfad;border-radius:16px;color:#7b6029}
+.tag{background:#e5efe6;color:#426b57}
+.footer{padding:12px}
+@media(max-width:650px){
+ .app{padding:10px 10px 30px}
+ .top{padding:13px;border-radius:20px;align-items:flex-start}
+ .brand{gap:9px}
+ .logo{width:44px;height:44px;flex-shrink:0}
+ .pill{white-space:normal;max-width:112px;text-align:center;font-size:10px}
+ .nav{display:grid;grid-template-columns:1fr 1fr;overflow:visible}
+ .nav button{white-space:normal;min-height:44px;padding:9px 7px;font-size:12px}
+ .panel{padding:15px;border-radius:19px}
+ .formgrid{grid-template-columns:1fr}
+ .student{align-items:flex-start;flex-wrap:wrap}
+ .statuses{width:100%;padding-left:50px}
+ .status{flex:1;min-width:76px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand"><div class="logo">✓</div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
+  <span class="pill">Versi percubaan · simpanan peranti ini</span>
+</header>
+<nav class="nav">
+  <button class="active" data-tab="take">📋 Ambil Kehadiran</button>
+  <button data-tab="report">📊 Laporan Bulanan</button>
+  <button data-tab="manage">👥 Kelas & Pelajar</button>
+  <button data-tab="backup">⚙️ Tetapan & Sandaran</button>
+</nav>
+
+<section id="takeSection" class="section active">
+  <div class="panel">
+    <div class="spread"><div><h2>Ambil kehadiran</h2><p class="sub">Pilih kelas, semak tarikh dan tanda status pelajar.</p></div><span id="sessionBadge" class="tag">Belum disimpan</span></div>
+    <div class="formgrid">
+      <div class="field"><label>Tahun akademik</label><select id="takeYear"></select></div>
+      <div class="field"><label>Kelas</label><select id="takeClass"></select></div>
+      <div class="field"><label>Tarikh kelas</label><input type="date" id="takeDate"></div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="soft tiny" id="allPresent">Tandakan semua hadir</button>
+      <button class="outline tiny" id="clearMarks">Kosongkan tanda</button>
+      <span id="markedCount" class="sub" style="margin:0 0 0 auto">0 / 0 ditanda</span>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="spread"><div><h2 id="rosterTitle">Senarai pelajar</h2><p class="sub" id="rosterSub">Pilih tahun dan kelas.</p></div><input id="studentSearch" placeholder="Cari nama..." style="max-width:230px"></div>
+    <div id="roster" class="list"></div>
+    <div class="spread" style="margin-top:16px"><span class="sub" style="margin:0">Pastikan semua status ditanda sebelum simpan.</span><button class="primary" id="saveAttendance">Simpan kehadiran</button></div>
+  </div>
+  <div class="notice">Nota: Versi ini menyimpan data pada pelayar/peranti yang digunakan. Buat sandaran berkala melalui menu Tetapan & Sandaran. Jangan masukkan data pelajar sebenar pada peranti awam.</div>
+</section>
+
+<section id="reportSection" class="section">
+  <div class="panel">
+    <h2>Laporan bulanan</h2><p class="sub">Ringkasan kehadiran mengikut kelas, bulan dan tahun.</p>
+    <div class="formgrid">
+      <div class="field"><label>Tahun akademik</label><select id="reportYear"></select></div>
+      <div class="field"><label>Kelas</label><select id="reportClass"></select></div>
+      <div class="field"><label>Bulan laporan</label><input type="month" id="reportMonth"></div>
+    </div>
+    <div class="row no-print" style="margin-top:13px"><button class="primary" id="generateReport">Jana laporan</button><button class="outline" id="exportCsv">Eksport CSV</button><button class="outline" id="printReport">Cetak / Simpan PDF</button></div>
+  </div>
+  <div id="reportOutput"></div>
+</section>
+
+<section id="manageSection" class="section">
+  <div class="panel">
+    <h2>Urus tahun akademik & kelas</h2><p class="sub">Tambah tahun atau kelas. Senarai tahun terdahulu boleh dikekalkan untuk arkib.</p>
+    <div class="formgrid">
+      <div class="field"><label>Tahun akademik</label><input id="newYear" type="number" min="2000" max="2100" placeholder="Contoh: 2027"></div>
+      <div class="field"><label>Nama kelas</label><input id="newClass" placeholder="Contoh: Form 2 A"></div>
+      <div class="field" style="justify-content:end"><button class="primary" id="addClass">Tambah kelas</button></div>
+    </div>
+    <div id="classList" style="margin-top:18px"></div>
+  </div>
+  <div class="panel">
+    <h2>Senarai pelajar</h2><p class="sub">Pilih kelas dahulu. Tambah seorang demi seorang atau import CSV.</p>
+    <div class="formgrid">
+      <div class="field"><label>Tahun</label><select id="manageYear"></select></div>
+      <div class="field"><label>Kelas</label><select id="manageClass"></select></div>
+      <div class="field"><label>Nama pelajar</label><input id="newStudent" placeholder="Nama penuh"></div>
+    </div>
+    <div class="row" style="margin-top:12px"><button class="primary" id="addStudent">Tambah pelajar</button><button class="outline" id="downloadTemplate">Muat turun templat CSV</button><label class="outline" style="display:inline-flex;align-items:center;gap:7px;padding:10px 13px;border-radius:12px;font-weight:650;cursor:pointer">Import CSV<input id="importStudents" type="file" accept=".csv,text/csv" hidden></label></div>
+    <div id="manageRoster" style="margin-top:15px"></div>
+  </div>
+</section>
+
+<section id="backupSection" class="section">
+  <div class="panel">
+    <h2>Tetapan & sandaran</h2><p class="sub">Data prototaip disimpan pada pelayar semasa. Sandaran membolehkan awak memindahkan data secara manual ke peranti lain.</p>
+    <div class="notice">Perhatian privasi: ini bukan lagi sistem berpusat dengan log masuk. Data tidak disegerakkan automatik antara iPad dan komputer. Untuk penggunaan rasmi dengan data pelajar, versi seterusnya perlu dilindungi dengan log masuk dan pangkalan data yang selamat.</div>
+    <div class="row" style="margin-top:15px"><button class="primary" id="exportBackup">Eksport semua data (JSON)</button><label class="outline" style="display:inline-flex;align-items:center;gap:7px;padding:10px 13px;border-radius:12px;font-weight:650;cursor:pointer">Pulihkan sandaran<input id="restoreBackup" type="file" accept=".json,application/json" hidden></label><button class="danger" id="resetDemo">Padam semua data</button></div>
+  </div>
+  <div class="panel"><h3>Aliran kerja yang disyorkan</h3><ol style="color:var(--muted);line-height:1.8;padding-left:20px"><li>Tambah tahun dan kelas.</li><li>Import senarai pelajar melalui CSV.</li><li>Setiap kali masuk kelas, pilih kelas dan tarikh, kemudian tandakan status.</li><li>Simpan rekod selepas selesai.</li><li>Pada hujung bulan, jana laporan dan eksport CSV atau cetak sebagai PDF.</li><li>Buat sandaran berkala.</li></ol></div>
+</section>
+
+<div class="footer">Sensei Attendance · Prototaip khusus kehadiran · Tiada data pelajar sebenar dimasukkan</div>
+</div>
+<div id="toast" class="toast hidden"></div>
+<script>
+const KEY='senseiAttendanceV1';
+const today=()=>new Date().toISOString().slice(0,10);
+const currentYear=new Date().getFullYear();
+let data=loadData(), marks={};
+function seed(){return {years:[currentYear],classes:[],students:[],records:[]}}
+function loadData(){try{let x=JSON.parse(localStorage.getItem(KEY));return x&&x.years?x:seed()}catch(e){return seed()}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(data))}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),2400)}
+function clsId(y,c){return `${y}::${c}`}
+function selectedClass(y,id){return data.classes.find(c=>c.id===id&&String(c.year)===String(y))}
+function classesFor(y){return data.classes.filter(c=>String(c.year)===String(y))}
+function studentsFor(id){return data.students.filter(s=>s.classId===id).sort((a,b)=>a.name.localeCompare(b.name,'ms'))}
+function getVal(id){return document.getElementById(id).value}
+function setOptions(id,items,selected,placeholder){let el=document.getElementById(id);let old=selected??el.value;el.innerHTML=(placeholder?`<option value="">${esc(placeholder)}</option>`:'')+items.map(x=>`<option value="${esc(x.value)}">${esc(x.label)}</option>`).join('');if(items.some(x=>String(x.value)===String(old)))el.value=old;else if(items.length)el.value=items[0].value}
+function refreshSelectors(){
+ let years=[...new Set([...data.years,...data.classes.map(c=>Number(c.year))])].sort((a,b)=>b-a);
+ ['takeYear','reportYear','manageYear'].forEach(id=>{let old=getVal(id);setOptions(id,years.map(y=>({value:y,label:String(y)})),old||currentYear)});
+ refreshClassSelectors();renderClassList();renderManageRoster();renderRoster();
+}
+function refreshClassSelectors(){
+ const pairs=[['takeYear','takeClass'],['reportYear','reportClass'],['manageYear','manageClass']];
+ pairs.forEach(([yid,cid])=>{let y=getVal(yid)||currentYear;let old=getVal(cid);let list=classesFor(y).map(c=>({value:c.id,label:c.name}));setOptions(cid,list,old,'Pilih kelas')});
+}
+function init(){
+ document.getElementById('takeDate').value=today();
+ document.getElementById('reportMonth').value=today().slice(0,7);
+ ['takeYear','reportYear','manageYear'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{refreshClassSelectors();renderRoster();renderManageRoster();if(id==='reportYear')generateReport()}));
+ ['takeClass','takeDate'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{loadMarks();renderRoster()}));
+ document.getElementById('manageClass').addEventListener('change',renderManageRoster);
+ document.getElementById('studentSearch').addEventListener('input',renderRoster);
+ document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+ document.getElementById('allPresent').onclick=()=>{studentsFor(getVal('takeClass')).forEach(s=>marks[s.id]='present');renderRoster()};
+ document.getElementById('clearMarks').onclick=()=>{marks={};renderRoster()};
+ document.getElementById('saveAttendance').onclick=saveAttendance;
+ document.getElementById('addClass').onclick=addClass;
+ document.getElementById('addStudent').onclick=addStudent;
+ document.getElementById('downloadTemplate').onclick=downloadTemplate;
+ document.getElementById('importStudents').onchange=importStudents;
+ document.getElementById('generateReport').onclick=generateReport;
+ document.getElementById('exportCsv').onclick=exportCsv;
+ document.getElementById('printReport').onclick=()=>window.print();
+ document.getElementById('exportBackup').onclick=exportBackup;
+ document.getElementById('restoreBackup').onchange=restoreBackup;
+ document.getElementById('resetDemo').onclick=resetAll;
+ refreshSelectors();loadMarks();renderRoster();generateReport();
+}
+function switchTab(tab){document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===tab+'Section'));if(tab==='report')generateReport();if(tab==='manage'){renderClassList();renderManageRoster()}}
+function loadMarks(){
+ let id=getVal('takeClass'),date=getVal('takeDate');marks={};
+ let rec=data.records.find(r=>r.classId===id&&r.date===date);
+ if(rec)marks={...rec.marks};
+ document.getElementById('sessionBadge').textContent=rec?'Rekod telah disimpan':'Belum disimpan';
+}
+function renderRoster(){
+ const id=getVal('takeClass'),date=getVal('takeDate'),roster=document.getElementById('roster');
+ const list=studentsFor(id).filter(s=>s.name.toLowerCase().includes((getVal('studentSearch')||'').toLowerCase()));
+ document.getElementById('rosterTitle').textContent=selectedClass(getVal('takeYear'),id)?.name||'Senarai pelajar';
+ document.getElementById('rosterSub').textContent=`${date||'Tarikh belum dipilih'} · ${studentsFor(id).length} pelajar`;
+ if(!id){roster.innerHTML='<div class="empty">Tambah tahun, kelas dan senarai pelajar di menu Kelas & Pelajar dahulu.</div>';updateMarked();return}
+ if(!list.length){roster.innerHTML='<div class="empty">Tiada pelajar ditemui. Tambah atau import senarai pelajar di menu Kelas & Pelajar.</div>';updateMarked();return}
+ roster.innerHTML=list.map((s,i)=>{let st=marks[s.id]||'';return `<div class="student"><div class="avatar">${i+1}</div><div class="student-name"><strong>${esc(s.name)}</strong><small>${esc(s.code||'')}</small></div><div class="statuses">${[['present','Hadir'],['absent','Tidak hadir'],['late','Lewat'],['excused','Berkebenaran']].map(([v,l])=>`<button class="status ${st===v?'selected '+v:''}" data-student="${s.id}" data-status="${v}">${l}</button>`).join('')}</div></div>`}).join('');
+ roster.querySelectorAll('[data-student]').forEach(b=>b.onclick=()=>{marks[b.dataset.student]=b.dataset.status;renderRoster()});
+ updateMarked();
+}
+function updateMarked(){let ss=studentsFor(getVal('takeClass'));let n=ss.filter(s=>marks[s.id]).length;document.getElementById('markedCount').textContent=`${n} / ${ss.length} ditanda`}
+function saveAttendance(){
+ const id=getVal('takeClass'),date=getVal('takeDate'),ss=studentsFor(id);
+ if(!id){toast('Pilih kelas dahulu.');return}if(!ss.length){toast('Tambah senarai pelajar dahulu.');return}if(!date){toast('Pilih tarikh.');return}
+ let missing=ss.filter(s=>!marks[s.id]);
+ if(missing.length){if(!confirm(`${missing.length} pelajar belum ditanda. Simpan juga? Pelajar yang belum ditanda tidak dikira sebagai hadir.`))return}
+ let rec=data.records.find(r=>r.classId===id&&r.date===date);
+ if(rec){rec.marks={...marks};rec.updatedAt=new Date().toISOString()}else data.records.push({classId:id,date,marks:{...marks},updatedAt:new Date().toISOString()});
+ persist();document.getElementById('sessionBadge').textContent='Disimpan ✓';toast('Kehadiran berjaya disimpan.');generateReport()
+}
+function addClass(){
+ let y=Number(getVal('newYear')),name=getVal('newClass').trim();
+ if(!y||y<2000||y>2100||!name){toast('Masukkan tahun dan nama kelas.');return}
+ if(data.classes.some(c=>c.year===y&&c.name.toLowerCase()===name.toLowerCase())){toast('Kelas ini sudah wujud untuk tahun tersebut.');return}
+ if(!data.years.includes(y))data.years.push(y);
+ data.classes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),year:y,name});persist();document.getElementById('newClass').value='';refreshSelectors();document.getElementById('manageYear').value=String(y);refreshClassSelectors();renderManageRoster();toast('Kelas ditambah.')
+}
+function addStudent(){
+ let id=getVal('manageClass'),name=getVal('newStudent').trim();
+ if(!id){toast('Pilih kelas dahulu.');return}if(!name){toast('Masukkan nama pelajar.');return}
+ if(data.students.some(s=>s.classId===id&&s.name.toLowerCase()===name.toLowerCase())){toast('Nama pelajar ini sudah ada dalam kelas.');return}
+ data.students.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),classId:id,name});persist();document.getElementById('newStudent').value='';renderManageRoster();renderRoster();toast('Pelajar ditambah.')
+}
+function renderClassList(){
+ let el=document.getElementById('classList');
+ if(!data.classes.length){el.innerHTML='<div class="empty">Belum ada kelas. Tambah kelas di atas.</div>';return}
+ el.innerHTML='<div class="tablewrap"><table><thead><tr><th>Tahun</th><th>Kelas</th><th>Pelajar</th><th>Rekod kehadiran</th><th></th></tr></thead><tbody>'+data.classes.slice().sort((a,b)=>b.year-a.year||a.name.localeCompare(b.name)).map(c=>`<tr><td>${c.year}</td><td><strong>${esc(c.name)}</strong></td><td>${studentsFor(c.id).length}</td><td>${data.records.filter(r=>r.classId===c.id).length} sesi</td><td><button class="danger tiny" data-delclass="${c.id}">Padam kelas</button></td></tr>`).join('')+'</tbody></table></div>';
+ el.querySelectorAll('[data-delclass]').forEach(b=>b.onclick=()=>{let c=data.classes.find(x=>x.id===b.dataset.delclass);if(confirm(`Padam kelas ${c.name} dan semua rekod pelajarnya? Tindakan ini tidak boleh dibatalkan tanpa sandaran.`)){data.classes=data.classes.filter(x=>x.id!==c.id);let ids=data.students.filter(s=>s.classId===c.id).map(s=>s.id);data.students=data.students.filter(s=>s.classId!==c.id);data.records=data.records.filter(r=>r.classId!==c.id);ids.forEach(id=>delete marks[id]);persist();refreshSelectors();toast('Kelas dipadam.')}})
+}
+function renderManageRoster(){
+ let id=getVal('manageClass'),el=document.getElementById('manageRoster'),ss=studentsFor(id);
+ if(!id){el.innerHTML='<div class="empty">Pilih kelas untuk mengurus senarai pelajar.</div>';return}
+ el.innerHTML=ss.length?'<div class="tablewrap"><table><thead><tr><th>#</th><th>Nama pelajar</th><th></th></tr></thead><tbody>'+ss.map((s,i)=>`<tr><td>${i+1}</td><td>${esc(s.name)}</td><td><button class="outline tiny" data-rename="${s.id}">Edit nama</button> <button class="danger tiny" data-delstudent="${s.id}">Padam</button></td></tr>`).join('')+'</tbody></table></div>':'<div class="empty">Belum ada pelajar dalam kelas ini.</div>';
+ el.querySelectorAll('[data-rename]').forEach(b=>b.onclick=()=>{let s=data.students.find(x=>x.id===b.dataset.rename),n=prompt('Nama pelajar:',s.name);if(n&&n.trim()){s.name=n.trim();persist();renderManageRoster();renderRoster();toast('Nama dikemas kini.')}});
+ el.querySelectorAll('[data-delstudent]').forEach(b=>b.onclick=()=>{let s=data.students.find(x=>x.id===b.dataset.delstudent);if(confirm(`Padam ${s.name} daripada senarai? Rekod kehadiran terdahulu bagi pelajar ini turut dibersihkan.`)){data.students=data.students.filter(x=>x.id!==s.id);data.records.forEach(r=>delete r.marks[s.id]);delete marks[s.id];persist();renderManageRoster();renderRoster();toast('Pelajar dipadam.')}})
+}
+function importStudents(e){
+ const file=e.target.files[0],id=getVal('manageClass');if(!file)return;if(!id){toast('Pilih kelas dahulu.');e.target.value='';return}
+ const reader=new FileReader();reader.onload=()=>{let lines=String(reader.result).replace(/^\uFEFF/,'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);let start=/nama|name/i.test(lines[0])?1:0;let count=0;for(let line of lines.slice(start)){let name=line.split(',')[0].replace(/^"|"$/g,'').trim();if(name&&!data.students.some(s=>s.classId===id&&s.name.toLowerCase()===name.toLowerCase())){data.students.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),classId:id,name});count++}}persist();renderManageRoster();renderRoster();toast(`${count} pelajar diimport.`);e.target.value=''};reader.readAsText(file)
+}
+function download(filename,content,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function downloadTemplate(){download('templat_senarai_pelajar.csv','Nama\nContoh Pelajar 1\nContoh Pelajar 2\n','text/csv;charset=utf-8')}
+function monthRecords(y,cid,month){return data.records.filter(r=>r.classId===cid&&r.date.startsWith(month)&&String(selectedClass(y,cid)?.year)===String(y)).sort((a,b)=>a.date.localeCompare(b.date))}
+function generateReport(){
+ let y=getVal('reportYear'),cid=getVal('reportClass'),month=getVal('reportMonth')||today().slice(0,7),out=document.getElementById('reportOutput');
+ if(!cid){out.innerHTML='<div class="panel empty">Tambah atau pilih kelas untuk melihat laporan.</div>';return}
+ let ss=studentsFor(cid),recs=monthRecords(y,cid,month);
+ let totals={present:0,absent:0,late:0,excused:0,unmarked:0};
+ ss.forEach(s=>recs.forEach(r=>{let v=r.marks[s.id]||'unmarked';totals[v]=(totals[v]||0)+1}));
+ let possible=ss.length*recs.length,attended=totals.present+totals.late,rate=possible?Math.round(attended/possible*100):0;
+ let rows=ss.map(s=>{let t={present:0,absent:0,late:0,excused:0,unmarked:0};recs.forEach(r=>{let v=r.marks[s.id]||'unmarked';t[v]++});let denom=recs.length-t.excused-t.unmarked;let pct=denom?Math.round((t.present+t.late)/denom*100):0;return {...s,t,pct,denom}}).sort((a,b)=>a.name.localeCompare(b.name,'ms'));
+ out.innerHTML=`<div class="panel" id="printableReport"><div class="spread"><div><h2>Laporan Kehadiran Bulanan</h2><p class="sub">${esc(selectedClass(y,cid)?.name||'')} · ${esc(month)}</p></div><span class="tag">${recs.length} sesi direkodkan</span></div><div class="grid"><div class="stat"><small>Kadar hadir keseluruhan</small><strong>${possible?rate+'%':'—'}</strong></div><div class="stat"><small>Jumlah hadir</small><strong>${totals.present}</strong></div><div class="stat"><small>Tidak hadir</small><strong>${totals.absent}</strong></div><div class="stat"><small>Lewat</small><strong>${totals.late}</strong></div></div><p class="sub" style="margin-top:13px">Kadar keseluruhan mengira Hadir dan Lewat sebagai hadir; status berkebenaran dan belum ditanda dikecualikan daripada kadar individu. Sesi bermaksud tarikh kehadiran yang telah disimpan.</p><div class="tablewrap"><table><thead><tr><th>Nama pelajar</th><th>Hadir</th><th>Tidak hadir</th><th>Lewat</th><th>Berkebenaran</th><th>Belum ditanda</th><th>Kadar hadir</th></tr></thead><tbody>${rows.map(s=>`<tr><td>${esc(s.name)}</td><td>${s.t.present}</td><td>${s.t.absent}</td><td>${s.t.late}</td><td>${s.t.excused}</td><td>${s.t.unmarked}</td><td>${s.denom?s.pct+'%':'—'}</td></tr>`).join('')}</tbody></table></div>${!recs.length?'<div class="empty">Tiada rekod kehadiran disimpan untuk bulan ini.</div>':''}</div>`;
+}
+function csvEscape(x){return '"'+String(x??'').replace(/"/g,'""')+'"'}
+function exportCsv(){
+ let y=getVal('reportYear'),cid=getVal('reportClass'),month=getVal('reportMonth')||today().slice(0,7);if(!cid){toast('Pilih kelas dahulu.');return}
+ let ss=studentsFor(cid),recs=monthRecords(y,cid,month);let lines=[['Tahun','Kelas','Bulan','Nama Pelajar','Hadir','Tidak hadir','Lewat','Berkebenaran','Belum ditanda','Kadar hadir']];
+ ss.forEach(s=>{let t={present:0,absent:0,late:0,excused:0,unmarked:0};recs.forEach(r=>{let v=r.marks[s.id]||'unmarked';t[v]++});let d=recs.length-t.excused-t.unmarked,p=d?Math.round((t.present+t.late)/d*100)+'%':'—';lines.push([y,selectedClass(y,cid)?.name,month,s.name,t.present,t.absent,t.late,t.excused,t.unmarked,p])});
+ download(`laporan_kehadiran_${y}_${month}.csv`,'\uFEFF'+lines.map(r=>r.map(csvEscape).join(',')).join('\r\n'),'text/csv;charset=utf-8');toast('Laporan CSV dimuat turun.')
+}
+function exportBackup(){download(`sandaran_sensei_attendance_${today()}.json`,JSON.stringify(data,null,2),'application/json');toast('Sandaran dimuat turun.')}
+function restoreBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.years||!x.classes||!x.students||!x.records)throw Error();if(confirm('Gantikan semua data semasa dengan sandaran ini?')){data=x;persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Sandaran dipulihkan.')}}catch(err){toast('Fail sandaran tidak sah.')}e.target.value=''};r.readAsText(f)}
+function resetAll(){if(confirm('Padam SEMUA tahun, kelas, pelajar dan rekod kehadiran daripada pelayar ini? Eksport sandaran dahulu jika perlu.')){data=seed();marks={};persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Semua data dipadam.')}}
+init();
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+}
+</script>
+</body>
+</html>
