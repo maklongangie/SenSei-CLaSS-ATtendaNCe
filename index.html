@@ -17,50 +17,79 @@
 @media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:1fr 1fr}.panel{padding:14px}.brand h1{font-size:19px}.top{align-items:flex-start}.pill{display:none}.student{align-items:flex-start;flex-wrap:wrap}.student-name{min-width:calc(100% - 58px)}.statuses{width:100%;padding-left:50px}.status{flex:1;min-width:62px;text-align:center;padding:9px 4px}.top .primary{padding:10px;font-size:12px}}
 @media print{body{background:white}.nav,.top button,.actions,.status,.no-print,.footer{display:none!important}.panel{box-shadow:none;break-inside:avoid}.section{display:none!important}#reportSection{display:block!important}.app{max-width:none;padding:0}}
 
-/* Sensei's soft-sage cute theme */
+
+/* Sensei Attendance — extra cute polish, Soft Sage stationery theme */
 :root{
- --ink:#263d32;--muted:#718176;--sage:#527b66;--sage2:#e5efe6;
- --cream:#fffaf0;--line:#e6e6d9;--white:#fffefa;--red:#b64d4d;
- --amber:#a76d1c;--blue:#426b8b;--shadow:0 9px 28px rgba(56,83,64,.09);
+  --ink:#263d32; --muted:#718176; --sage:#527b66; --sage2:#e5efe6;
+  --cream:#fffaf0; --line:#e9e6d9; --white:#fffefa;
+  --shadow:0 10px 30px rgba(57,81,63,.08);
 }
-body{background:radial-gradient(circle at 8% 4%,#f4e8bf 0,transparent 17rem),radial-gradient(circle at 95% 16%,#e5efe6 0,transparent 18rem),var(--cream);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.app{max-width:1000px;padding:20px 15px 42px}
-.top{padding:15px 17px;background:rgba(255,254,250,.88);border:1px solid #e9e8db;border-radius:24px;box-shadow:var(--shadow);margin-bottom:15px}
-.logo{width:52px;height:52px;background:#e5efe6;color:#527b66;border-radius:18px;font-size:25px;box-shadow:inset 0 -3px 0 rgba(82,123,102,.08)}
-.brand h1{font-size:clamp(19px,3vw,24px);letter-spacing:-.5px}
-.brand p{font-size:12px}
-.pill{background:#fff0c9;color:#8a6723;border:1px solid #f1dfaa}
-.nav{gap:7px;padding:5px;background:#f0f0e6;border-radius:17px;margin-bottom:17px}
-.nav button{border-radius:13px;padding:11px 13px}
-.nav button.active{background:#527b66;box-shadow:0 4px 10px rgba(82,123,102,.18)}
-.panel{background:rgba(255,254,250,.96);border-color:#e9e8db;border-radius:23px;padding:19px;box-shadow:var(--shadow)}
-h2{letter-spacing:-.25px}
-h2:before{content:"✿";color:#d2a94c;margin-right:8px;font-size:15px}
-h3{letter-spacing:-.15px}
+html{background:var(--cream);scroll-behavior:smooth}
+body{
+ background:
+  radial-gradient(circle at 3% 2%,rgba(245,222,151,.34),transparent 17rem),
+  radial-gradient(circle at 98% 12%,rgba(198,224,203,.42),transparent 20rem),
+  var(--cream);
+ color:var(--ink);
+}
+.app{max-width:1120px;padding:18px 16px 40px}
+.top{
+ padding:15px 17px;background:rgba(255,254,250,.92);
+ border:1px solid var(--line);border-radius:25px;
+ box-shadow:var(--shadow);margin:4px 0 16px;
+}
+.brand{gap:13px}
+.logo{
+ position:relative;width:54px;height:54px;border-radius:19px;
+ background:linear-gradient(145deg,#edf5ed,#dceadf);
+ color:var(--sage);font-size:27px;
+ box-shadow:inset 0 -3px 0 rgba(82,123,102,.08);
+}
+.logo span{transform:translateY(-1px)}
+.logo i{position:absolute;right:5px;top:4px;font-size:12px;font-style:normal;color:#d5ad4e}
+.brand h1{font-size:clamp(21px,3vw,26px);letter-spacing:-.65px}
+.brand p{font-size:13px;letter-spacing:.05px}
+.pill{background:#fff1c9;color:#94691d;border:1px solid #f0dda0;padding:8px 12px}
+.nav{
+ gap:7px;padding:5px;background:rgba(237,239,226,.86);
+ border:1px solid rgba(233,230,217,.75);border-radius:18px;margin-bottom:18px;
+}
+.nav button{border-radius:14px;padding:12px 14px;transition:transform .14s ease,background .14s ease}
+.nav button:hover{transform:translateY(-1px)}
+.nav button.active{background:var(--sage);box-shadow:0 4px 0 rgba(50,88,66,.12),0 7px 16px rgba(82,123,102,.14)}
+.panel{
+ background:rgba(255,254,250,.96);border:1px solid var(--line);
+ border-radius:24px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;
+}
+h2{letter-spacing:-.35px}
+h2:before{content:"✿";display:inline-block;color:#d4ad4e;font-size:15px;margin-right:9px;transform:translateY(-1px)}
+h3{letter-spacing:-.2px}
 .sub{line-height:1.55}
-button{transition:transform .12s ease,box-shadow .12s ease;border-radius:13px}
-button:active{transform:scale(.98)}
-.primary{background:#527b66;box-shadow:0 4px 0 #3f6551}
-.soft{background:#e5efe6;color:#426b57}
-.outline{background:#fffefa;border-color:#e2e5d9}
-.stat{background:linear-gradient(145deg,#f7fbf5,#fff7e6);border-radius:18px}
-.student{background:#fffefa;border-color:#e9e8db;border-radius:17px;padding:13px}
-.student:nth-child(even){background:#fcfcf5}
-.avatar{border-radius:14px;background:#f4e8bf;color:#7e672e}
+button{transition:transform .12s ease,box-shadow .12s ease}
+button:active{transform:scale(.985)}
+.primary{background:var(--sage);box-shadow:0 3px 0 #3e654f}
+.soft{background:var(--sage2);color:#426b57}
+.outline{background:var(--white);border-color:var(--line)}
+.stat{background:linear-gradient(145deg,#f4faf4,#fff7e6);border:1px solid #e9e7da;border-radius:19px}
+.student{background:#fffefa;border-color:#e9e6d9;border-radius:17px;padding:13px}
+.student:nth-child(even){background:#fcfcf6}
+.avatar{border-radius:14px;background:#f8edca;color:#856d2f}
 .status{border-radius:12px}
-input,select{border-color:#e0e4d8;border-radius:13px;background:#fffefa;min-height:43px}
+input,select,textarea{border-color:#e1e5d9;border-radius:13px;background:#fffefa;min-height:44px}
+input:focus,select:focus,textarea:focus{outline:3px solid rgba(82,123,102,.14);border-color:#8cad96}
 .notice{background:#fff4d9;border-color:#f0dfad;border-radius:16px;color:#7b6029}
 .tag{background:#e5efe6;color:#426b57}
+.empty{padding:34px 14px}
 .footer{padding:12px}
 @media(max-width:650px){
- .app{padding:10px 10px 30px}
- .top{padding:13px;border-radius:20px;align-items:flex-start}
- .brand{gap:9px}
- .logo{width:44px;height:44px;flex-shrink:0}
- .pill{white-space:normal;max-width:112px;text-align:center;font-size:10px}
+ .app{padding:10px 10px 28px}
+ .top{padding:12px;border-radius:21px;align-items:flex-start}
+ .brand{gap:10px}
+ .logo{width:46px;height:46px;flex-shrink:0;border-radius:16px}
+ .pill{white-space:normal;max-width:125px;text-align:center;font-size:10px;line-height:1.35}
  .nav{display:grid;grid-template-columns:1fr 1fr;overflow:visible}
- .nav button{white-space:normal;min-height:44px;padding:9px 7px;font-size:12px}
- .panel{padding:15px;border-radius:19px}
+ .nav button{white-space:normal;min-height:46px;padding:9px 7px;font-size:12px}
+ .panel{padding:15px;border-radius:20px}
  .formgrid{grid-template-columns:1fr}
  .student{align-items:flex-start;flex-wrap:wrap}
  .statuses{width:100%;padding-left:50px}
@@ -68,12 +97,17 @@ input,select{border-color:#e0e4d8;border-radius:13px;background:#fffefa;min-heig
  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
+
+.avatar-logo{overflow:hidden;position:relative;padding:0;background:#e5efe6;border:2px solid #fffefa;box-shadow:0 0 0 1px #dbe6d9}
+.avatar-logo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:inherit}
+.avatar-logo i{z-index:2;background:rgba(255,250,240,.86);border-radius:50%;padding:2px 4px;right:1px;top:1px;font-size:10px}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
-  <div class="brand"><div class="logo">✓</div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
+  <div class="brand"><div class="logo avatar-logo"><img src="icons/ezun-avatar.png" alt="Avatar Sensei Ezun"><i>✦</i></div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
   <span class="pill">Versi percubaan · simpanan peranti ini</span>
 </header>
 <nav class="nav">

@@ -1,5 +1,5 @@
-const CACHE_NAME = 'sensei-attendance-v1';
-const APP_FILES = ['./', './index.html', './manifest.webmanifest', './icons/sensei-192.png', './icons/sensei-512.png'];
+const CACHE_NAME = 'sensei-attendance-v3';
+const APP_FILES = ['./', './index.html', './manifest.webmanifest', './icons/sensei-192.png', './icons/sensei-512.png', './icons/ezun-avatar.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)).then(() => self.skipWaiting()));
 });
