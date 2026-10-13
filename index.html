@@ -122,7 +122,53 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(82,123,102,.14);b
   <div class="brand"><div class="logo avatar-logo"><img src="icons/ezun-avatar.png" alt="Avatar Sensei Ezun"><i>✦</i></div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
   <span class="pill">Versi percubaan · simpanan peranti ini</span>
 </header>
-<nav class="nav">
+
+<div class="panel" id="authPanel">
+  <h2>☁️ Sensei Cloud</h2>
+  <p class="sub">
+    Log masuk untuk menguji sambungan akaun Sensei Attendance.
+  </p>
+
+  <div class="formgrid">
+    <div class="field">
+      <label for="authEmail">E-mel</label>
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="E-mel akaun awak"
+        autocomplete="username"
+      >
+    </div>
+
+    <div class="field">
+      <label for="authPassword">Kata laluan</label>
+      <input
+        id="authPassword"
+        type="password"
+        placeholder="Kata laluan"
+        autocomplete="current-password"
+      >
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:12px">
+    <button class="primary" id="authSignIn">
+      Log masuk
+    </button>
+    <button class="outline" id="authSignUp">
+      Daftar akaun
+    </button>
+    <button class="soft hidden" id="authSignOut">
+      Log keluar
+    </button>
+  </div>
+
+  <p id="authMessage" class="sub" style="margin-top:12px;margin-bottom:0">
+    Sambungan cloud belum diuji.
+  </p>
+</div>
+
+  <nav class="nav">
   <button class="active" data-tab="take">📋 Ambil Kehadiran</button>
   <button data-tab="report">📊 Laporan Bulanan</button>
   <button data-tab="manage">👥 Kelas & Pelajar</button>
