@@ -321,12 +321,56 @@ function saveAttendance(){
  persist();document.getElementById('sessionBadge').textContent='Disimpan ✓';toast('Kehadiran berjaya disimpan.');generateReport()
 }
 function addClass(){
- let y=Number(getVal('newYear')),name=getVal('newClass').trim();
- if(!y||y<2000||y>2100||!name){toast('Masukkan tahun dan nama kelas.');return}
- if(data.classes.some(c=>c.year===y&&c.name.toLowerCase()===name.toLowerCase())){toast('Kelas ini sudah wujud untuk tahun tersebut.');return}
- if(!data.years.includes(y))data.years.push(y);
- data.classes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),year:y,name});persist();document.getElementById('newClass').value='';refreshSelectors();document.getElementById('manageYear').value=String(y);refreshClassSelectors();renderManageRoster();toast('Kelas ditambah.')
+ 
+async function addClass(){
+  const y = Number(getVal('newYear'));
+  const name = getVal('newClass').trim();
+
+  if (!y || y < 2000 || y > 2100 || !name) {
+    toast('Masukkan tahun dan nama kelas.');
+    return;
+  }
+
+  if (data.classes.some(c =>
+    c.year === y && c.name.toLowerCase() === name.toLowerCase()
+  )) {
+    toast('Kelas ini sudah wujud untuk tahun tersebut.');
+    return;
+  }
+
+  const { data: savedClass, error } = await supabaseClient
+    .from('classes')
+    .insert({
+      user_id: (await supabaseClient.auth.getUser()).data.user.id,
+      academic_year: y,
+      class_name: name
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    toast('Kelas gagal disimpan ke cloud.');
+    return;
+  }
+
+  if (!data.years.includes(y)) data.years.push(y);
+
+  data.classes.push({
+    id: savedClass.id,
+    year: savedClass.academic_year,
+    name: savedClass.class_name
+  });
+
+  persist();
+  document.getElementById('newClass').value = '';
+  refreshSelectors();
+  document.getElementById('manageYear').value = String(y);
+  refreshClassSelectors();
+  renderManageRoster();
+  toast('Kelas berjaya disimpan ke cloud!');
 }
+
 function addStudent(){
  let id=getVal('manageClass'),name=getVal('newStudent').trim();
  if(!id){toast('Pilih kelas dahulu.');return}if(!name){toast('Masukkan nama pelajar.');return}
