@@ -373,7 +373,135 @@ function exportCsv(){
 function exportBackup(){download(`sandaran_sensei_attendance_${today()}.json`,JSON.stringify(data,null,2),'application/json');toast('Sandaran dimuat turun.')}
 function restoreBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.years||!x.classes||!x.students||!x.records)throw Error();if(confirm('Gantikan semua data semasa dengan sandaran ini?')){data=x;persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Sandaran dipulihkan.')}}catch(err){toast('Fail sandaran tidak sah.')}e.target.value=''};r.readAsText(f)}
 function resetAll(){if(confirm('Padam SEMUA tahun, kelas, pelajar dan rekod kehadiran daripada pelayar ini? Eksport sandaran dahulu jika perlu.')){data=seed();marks={};persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Semua data dipadam.')}}
-init();
+
+function setupAuth() {
+  const emailInput = document.getElementById('authEmail');
+  const passwordInput = document.getElementById('authPassword');
+  const signInButton = document.getElementById('authSignIn');
+  const signUpButton = document.getElementById('authSignUp');
+  const signOutButton = document.getElementById('authSignOut');
+  const message = document.getElementById('authMessage');
+
+  function showMessage(text) {
+    message.textContent = text;
+  }
+
+  function updateAuthUI(user) {
+    const loggedIn = Boolean(user);
+
+    emailInput.classList.toggle('hidden', loggedIn);
+    passwordInput.classList.toggle('hidden', loggedIn);
+    signInButton.classList.toggle('hidden', loggedIn);
+    signUpButton.classList.toggle('hidden', loggedIn);
+    signOutButton.classList.toggle('hidden', !loggedIn);
+
+    if (loggedIn) {
+      showMessage('Log masuk sebagai ' + user.email);
+    } else {
+      showMessage('Belum log masuk ke Sensei Cloud.');
+    }
+  }
+
+  signInButton.onclick = async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      showMessage('Masukkan e-mel dan kata laluan.');
+      return;
+    }
+
+    signInButton.disabled = true;
+    showMessage('Sedang log masuk...');
+
+    try {
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email,
+          password
+        });
+
+      if (error) throw error;
+
+      updateAuthUI(data.user);
+    } catch (error) {
+      showMessage('Log masuk gagal: ' + error.message);
+    } finally {
+      signInButton.disabled = false;
+    }
+  };
+
+  signUpButton.onclick = async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+      showMessage('Masukkan e-mel dan kata laluan.');
+      return;
+    }
+
+    if (password.length < 6) {
+      showMessage('Kata laluan mestilah sekurang-kurangnya 6 aksara.');
+      return;
+    }
+
+    signUpButton.disabled = true;
+    showMessage('Sedang mendaftar...');
+
+    try {
+      const { data, error } =
+        await supabaseClient.auth.signUp({
+          email,
+          password
+        });
+
+      if (error) throw error;
+
+      if (data.session) {
+        updateAuthUI(data.user);
+      } else {
+        showMessage(
+          'Pendaftaran diterima. Semak e-mel untuk pengesahan jika diminta.'
+        );
+      }
+    } catch (error) {
+      showMessage('Pendaftaran gagal: ' + error.message);
+    } finally {
+      signUpButton.disabled = false;
+    }
+  };
+
+  signOutButton.onclick = async () => {
+    signOutButton.disabled = true;
+
+    try {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) throw error;
+      updateAuthUI(null);
+    } catch (error) {
+      showMessage('Log keluar gagal: ' + error.message);
+    } finally {
+      signOutButton.disabled = false;
+    }
+  };
+
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    updateAuthUI(session?.user ?? null);
+  });
+
+  supabaseClient.auth.getSession().then(({ data, error }) => {
+    if (error) {
+      showMessage('Tidak dapat menyemak sesi log masuk.');
+      return;
+    }
+
+    updateAuthUI(data.session?.user ?? null);
+  });
+}
+
+setupAuth();
+
+  init();
 </script>
 
 <script>
