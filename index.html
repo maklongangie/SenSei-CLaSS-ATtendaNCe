@@ -11,97 +11,56 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/sensei-192.png">
 <title>Sensei Attendance</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-const SUPABASE_URL = 'https://rtsyurdqwptqawkefyer.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_1jHS66hD22SCyFSb1MSSMQ_VgUDZul5';
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
-</script>
-
-  <style>
+<style>
 :root{--ink:#20352b;--muted:#6d7c72;--sage:#426b57;--sage2:#e6eee6;--cream:#faf8f1;--line:#e1e7df;--white:#fff;--red:#b64d4d;--amber:#a76d1c;--blue:#426b8b;--shadow:0 8px 28px rgba(32,53,43,.07)}
 *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:650}.primary{background:var(--sage);color:white}.soft{background:var(--sage2);color:var(--sage)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}.danger{background:#fff0ef;color:var(--red)}.tiny{padding:7px 10px;font-size:13px}.app{max-width:1100px;margin:auto;padding:18px 16px 42px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 20px}.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;background:var(--sage2);color:var(--sage);display:grid;place-items:center;border-radius:15px;font-size:23px}.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:13px}.pill{font-size:12px;color:var(--sage);background:var(--sage2);border-radius:99px;padding:7px 10px;white-space:nowrap}.nav{display:flex;gap:8px;overflow:auto;margin-bottom:18px;padding-bottom:3px}.nav button{white-space:nowrap;background:transparent;color:var(--muted)}.nav button.active{background:var(--sage);color:white}.panel{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-bottom:16px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{background:#f7faf6;border:1px solid var(--line);padding:15px;border-radius:16px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin-top:7px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.spread{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}.field label{font-size:12px;font-weight:700;color:var(--muted)}input,select{width:100%;min-width:0;background:white;border:1px solid #d9e1d8;border-radius:11px;padding:11px 12px;color:var(--ink)}h2{font-size:19px;margin:0 0 6px}h3{font-size:15px;margin:0 0 12px}.sub{color:var(--muted);font-size:13px;margin:0 0 15px;line-height:1.5}.formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.list{display:flex;flex-direction:column;gap:8px}.student{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.avatar{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--sage2);color:var(--sage);font-weight:800;flex-shrink:0}.student-name{flex:1;min-width:0}.student-name strong{display:block;overflow-wrap:anywhere}.student-name small{color:var(--muted)}.statuses{display:flex;gap:5px;flex-wrap:wrap}.status{border:1px solid var(--line);padding:8px 10px;border-radius:10px;background:white;color:var(--muted);font-size:12px}.status.selected.present{background:#e5f4e9;border-color:#b8dfc3;color:#24643a}.status.selected.absent{background:#ffeded;border-color:#f0c1c1;color:#a43737}.status.selected.late{background:#fff3dc;border-color:#f1d39b;color:#8b5b13}.status.selected.excused{background:#eaf2fa;border-color:#c4d8ed;color:#315d84}.status.selected.unmarked{background:#eee;border-color:#bbb;color:#444}.hidden{display:none!important}.notice{padding:12px 14px;background:#fff6df;border:1px solid #f0dca6;border-radius:13px;color:#76551a;font-size:13px;line-height:1.5}.empty{text-align:center;padding:30px 12px;color:var(--muted)}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:11px 10px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}.tag{display:inline-block;border-radius:99px;padding:4px 8px;font-size:11px;background:var(--sage2);color:var(--sage)}.actions{display:flex;gap:6px;flex-wrap:wrap}.section{display:none}.section.active{display:block}.footer{font-size:12px;color:var(--muted);text-align:center;margin-top:22px;line-height:1.6}.bar{height:7px;background:#edf0eb;border-radius:9px;overflow:hidden;margin-top:7px}.bar span{display:block;height:100%;background:var(--sage)}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#20352b;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:10;font-size:14px;max-width:90vw}
 @media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:1fr 1fr}.panel{padding:14px}.brand h1{font-size:19px}.top{align-items:flex-start}.pill{display:none}.student{align-items:flex-start;flex-wrap:wrap}.student-name{min-width:calc(100% - 58px)}.statuses{width:100%;padding-left:50px}.status{flex:1;min-width:62px;text-align:center;padding:9px 4px}.top .primary{padding:10px;font-size:12px}}
 @media print{body{background:white}.nav,.top button,.actions,.status,.no-print,.footer{display:none!important}.panel{box-shadow:none;break-inside:avoid}.section{display:none!important}#reportSection{display:block!important}.app{max-width:none;padding:0}}
 
-
-/* Sensei Attendance — extra cute polish, Soft Sage stationery theme */
+/* Sensei's soft-sage cute theme */
 :root{
-  --ink:#263d32; --muted:#718176; --sage:#527b66; --sage2:#e5efe6;
-  --cream:#fffaf0; --line:#e9e6d9; --white:#fffefa;
-  --shadow:0 10px 30px rgba(57,81,63,.08);
+ --ink:#263d32;--muted:#718176;--sage:#527b66;--sage2:#e5efe6;
+ --cream:#fffaf0;--line:#e6e6d9;--white:#fffefa;--red:#b64d4d;
+ --amber:#a76d1c;--blue:#426b8b;--shadow:0 9px 28px rgba(56,83,64,.09);
 }
-html{background:var(--cream);scroll-behavior:smooth}
-body{
- background:
-  radial-gradient(circle at 3% 2%,rgba(245,222,151,.34),transparent 17rem),
-  radial-gradient(circle at 98% 12%,rgba(198,224,203,.42),transparent 20rem),
-  var(--cream);
- color:var(--ink);
-}
-.app{max-width:1120px;padding:18px 16px 40px}
-.top{
- padding:15px 17px;background:rgba(255,254,250,.92);
- border:1px solid var(--line);border-radius:25px;
- box-shadow:var(--shadow);margin:4px 0 16px;
-}
-.brand{gap:13px}
-.logo{
- position:relative;width:54px;height:54px;border-radius:19px;
- background:linear-gradient(145deg,#edf5ed,#dceadf);
- color:var(--sage);font-size:27px;
- box-shadow:inset 0 -3px 0 rgba(82,123,102,.08);
-}
-.logo span{transform:translateY(-1px)}
-.logo i{position:absolute;right:5px;top:4px;font-size:12px;font-style:normal;color:#d5ad4e}
-.brand h1{font-size:clamp(21px,3vw,26px);letter-spacing:-.65px}
-.brand p{font-size:13px;letter-spacing:.05px}
-.pill{background:#fff1c9;color:#94691d;border:1px solid #f0dda0;padding:8px 12px}
-.nav{
- gap:7px;padding:5px;background:rgba(237,239,226,.86);
- border:1px solid rgba(233,230,217,.75);border-radius:18px;margin-bottom:18px;
-}
-.nav button{border-radius:14px;padding:12px 14px;transition:transform .14s ease,background .14s ease}
-.nav button:hover{transform:translateY(-1px)}
-.nav button.active{background:var(--sage);box-shadow:0 4px 0 rgba(50,88,66,.12),0 7px 16px rgba(82,123,102,.14)}
-.panel{
- background:rgba(255,254,250,.96);border:1px solid var(--line);
- border-radius:24px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;
-}
-h2{letter-spacing:-.35px}
-h2:before{content:"✿";display:inline-block;color:#d4ad4e;font-size:15px;margin-right:9px;transform:translateY(-1px)}
-h3{letter-spacing:-.2px}
+body{background:radial-gradient(circle at 8% 4%,#f4e8bf 0,transparent 17rem),radial-gradient(circle at 95% 16%,#e5efe6 0,transparent 18rem),var(--cream);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.app{max-width:1000px;padding:20px 15px 42px}
+.top{padding:15px 17px;background:rgba(255,254,250,.88);border:1px solid #e9e8db;border-radius:24px;box-shadow:var(--shadow);margin-bottom:15px}
+.logo{width:52px;height:52px;background:#e5efe6;color:#527b66;border-radius:18px;font-size:25px;box-shadow:inset 0 -3px 0 rgba(82,123,102,.08)}
+.brand h1{font-size:clamp(19px,3vw,24px);letter-spacing:-.5px}
+.brand p{font-size:12px}
+.pill{background:#fff0c9;color:#8a6723;border:1px solid #f1dfaa}
+.nav{gap:7px;padding:5px;background:#f0f0e6;border-radius:17px;margin-bottom:17px}
+.nav button{border-radius:13px;padding:11px 13px}
+.nav button.active{background:#527b66;box-shadow:0 4px 10px rgba(82,123,102,.18)}
+.panel{background:rgba(255,254,250,.96);border-color:#e9e8db;border-radius:23px;padding:19px;box-shadow:var(--shadow)}
+h2{letter-spacing:-.25px}
+h2:before{content:"✿";color:#d2a94c;margin-right:8px;font-size:15px}
+h3{letter-spacing:-.15px}
 .sub{line-height:1.55}
-button{transition:transform .12s ease,box-shadow .12s ease}
-button:active{transform:scale(.985)}
-.primary{background:var(--sage);box-shadow:0 3px 0 #3e654f}
-.soft{background:var(--sage2);color:#426b57}
-.outline{background:var(--white);border-color:var(--line)}
-.stat{background:linear-gradient(145deg,#f4faf4,#fff7e6);border:1px solid #e9e7da;border-radius:19px}
-.student{background:#fffefa;border-color:#e9e6d9;border-radius:17px;padding:13px}
-.student:nth-child(even){background:#fcfcf6}
-.avatar{border-radius:14px;background:#f8edca;color:#856d2f}
+button{transition:transform .12s ease,box-shadow .12s ease;border-radius:13px}
+button:active{transform:scale(.98)}
+.primary{background:#527b66;box-shadow:0 4px 0 #3f6551}
+.soft{background:#e5efe6;color:#426b57}
+.outline{background:#fffefa;border-color:#e2e5d9}
+.stat{background:linear-gradient(145deg,#f7fbf5,#fff7e6);border-radius:18px}
+.student{background:#fffefa;border-color:#e9e8db;border-radius:17px;padding:13px}
+.student:nth-child(even){background:#fcfcf5}
+.avatar{border-radius:14px;background:#f4e8bf;color:#7e672e}
 .status{border-radius:12px}
-input,select,textarea{border-color:#e1e5d9;border-radius:13px;background:#fffefa;min-height:44px}
-input:focus,select:focus,textarea:focus{outline:3px solid rgba(82,123,102,.14);border-color:#8cad96}
+input,select{border-color:#e0e4d8;border-radius:13px;background:#fffefa;min-height:43px}
 .notice{background:#fff4d9;border-color:#f0dfad;border-radius:16px;color:#7b6029}
 .tag{background:#e5efe6;color:#426b57}
-.empty{padding:34px 14px}
 .footer{padding:12px}
 @media(max-width:650px){
- .app{padding:10px 10px 28px}
- .top{padding:12px;border-radius:21px;align-items:flex-start}
- .brand{gap:10px}
- .logo{width:46px;height:46px;flex-shrink:0;border-radius:16px}
- .pill{white-space:normal;max-width:125px;text-align:center;font-size:10px;line-height:1.35}
+ .app{padding:10px 10px 30px}
+ .top{padding:13px;border-radius:20px;align-items:flex-start}
+ .brand{gap:9px}
+ .logo{width:44px;height:44px;flex-shrink:0}
+ .pill{white-space:normal;max-width:112px;text-align:center;font-size:10px}
  .nav{display:grid;grid-template-columns:1fr 1fr;overflow:visible}
- .nav button{white-space:normal;min-height:46px;padding:9px 7px;font-size:12px}
- .panel{padding:15px;border-radius:20px}
+ .nav button{white-space:normal;min-height:44px;padding:9px 7px;font-size:12px}
+ .panel{padding:15px;border-radius:19px}
  .formgrid{grid-template-columns:1fr}
  .student{align-items:flex-start;flex-wrap:wrap}
  .statuses{width:100%;padding-left:50px}
@@ -109,66 +68,15 @@ input:focus,select:focus,textarea:focus{outline:3px solid rgba(82,123,102,.14);b
  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
-
-.avatar-logo{overflow:hidden;position:relative;padding:0;background:#e5efe6;border:2px solid #fffefa;box-shadow:0 0 0 1px #dbe6d9}
-.avatar-logo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:inherit}
-.avatar-logo i{z-index:2;background:rgba(255,250,240,.86);border-radius:50%;padding:2px 4px;right:1px;top:1px;font-size:10px}
-
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
-  <div class="brand"><div class="logo avatar-logo"><img src="icons/ezun-avatar.png" alt="Avatar Sensei Ezun"><i>✦</i></div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
+  <div class="brand"><div class="logo">✓</div><div><h1>Sensei Attendance</h1><p>Rekod kehadiran kelas, ringkas dan pantas</p></div></div>
   <span class="pill">Versi percubaan · simpanan peranti ini</span>
 </header>
-
-<div class="panel" id="authPanel">
-  <h2>☁️ Sensei Cloud</h2>
-  <p class="sub">
-    Log masuk untuk menguji sambungan akaun Sensei Attendance.
-  </p>
-
-  <div class="formgrid">
-    <div class="field">
-      <label for="authEmail">E-mel</label>
-      <input
-        id="authEmail"
-        type="email"
-        placeholder="E-mel akaun awak"
-        autocomplete="username"
-      >
-    </div>
-
-    <div class="field">
-      <label for="authPassword">Kata laluan</label>
-      <input
-        id="authPassword"
-        type="password"
-        placeholder="Kata laluan"
-        autocomplete="current-password"
-      >
-    </div>
-  </div>
-
-  <div class="row" style="margin-top:12px">
-    <button class="primary" id="authSignIn">
-      Log masuk
-    </button>
-    <button class="outline" id="authSignUp">
-      Daftar akaun
-    </button>
-    <button class="soft hidden" id="authSignOut">
-      Log keluar
-    </button>
-  </div>
-
-  <p id="authMessage" class="sub" style="margin-top:12px;margin-bottom:0">
-    Sambungan cloud belum diuji.
-  </p>
-</div>
-
-  <nav class="nav">
+<nav class="nav">
   <button class="active" data-tab="take">📋 Ambil Kehadiran</button>
   <button data-tab="report">📊 Laporan Bulanan</button>
   <button data-tab="manage">👥 Kelas & Pelajar</button>
@@ -321,56 +229,12 @@ function saveAttendance(){
  persist();document.getElementById('sessionBadge').textContent='Disimpan ✓';toast('Kehadiran berjaya disimpan.');generateReport()
 }
 function addClass(){
- 
-async function addClass(){
-  const y = Number(getVal('newYear'));
-  const name = getVal('newClass').trim();
-
-  if (!y || y < 2000 || y > 2100 || !name) {
-    toast('Masukkan tahun dan nama kelas.');
-    return;
-  }
-
-  if (data.classes.some(c =>
-    c.year === y && c.name.toLowerCase() === name.toLowerCase()
-  )) {
-    toast('Kelas ini sudah wujud untuk tahun tersebut.');
-    return;
-  }
-
-  const { data: savedClass, error } = await supabaseClient
-    .from('classes')
-    .insert({
-      user_id: (await supabaseClient.auth.getUser()).data.user.id,
-      academic_year: y,
-      class_name: name
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    toast('Kelas gagal disimpan ke cloud.');
-    return;
-  }
-
-  if (!data.years.includes(y)) data.years.push(y);
-
-  data.classes.push({
-    id: savedClass.id,
-    year: savedClass.academic_year,
-    name: savedClass.class_name
-  });
-
-  persist();
-  document.getElementById('newClass').value = '';
-  refreshSelectors();
-  document.getElementById('manageYear').value = String(y);
-  refreshClassSelectors();
-  renderManageRoster();
-  toast('Kelas berjaya disimpan ke cloud!');
+ let y=Number(getVal('newYear')),name=getVal('newClass').trim();
+ if(!y||y<2000||y>2100||!name){toast('Masukkan tahun dan nama kelas.');return}
+ if(data.classes.some(c=>c.year===y&&c.name.toLowerCase()===name.toLowerCase())){toast('Kelas ini sudah wujud untuk tahun tersebut.');return}
+ if(!data.years.includes(y))data.years.push(y);
+ data.classes.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),year:y,name});persist();document.getElementById('newClass').value='';refreshSelectors();document.getElementById('manageYear').value=String(y);refreshClassSelectors();renderManageRoster();toast('Kelas ditambah.')
 }
-
 function addStudent(){
  let id=getVal('manageClass'),name=getVal('newStudent').trim();
  if(!id){toast('Pilih kelas dahulu.');return}if(!name){toast('Masukkan nama pelajar.');return}
@@ -417,135 +281,7 @@ function exportCsv(){
 function exportBackup(){download(`sandaran_sensei_attendance_${today()}.json`,JSON.stringify(data,null,2),'application/json');toast('Sandaran dimuat turun.')}
 function restoreBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.years||!x.classes||!x.students||!x.records)throw Error();if(confirm('Gantikan semua data semasa dengan sandaran ini?')){data=x;persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Sandaran dipulihkan.')}}catch(err){toast('Fail sandaran tidak sah.')}e.target.value=''};r.readAsText(f)}
 function resetAll(){if(confirm('Padam SEMUA tahun, kelas, pelajar dan rekod kehadiran daripada pelayar ini? Eksport sandaran dahulu jika perlu.')){data=seed();marks={};persist();refreshSelectors();loadMarks();renderRoster();generateReport();toast('Semua data dipadam.')}}
-
-function setupAuth() {
-  const emailInput = document.getElementById('authEmail');
-  const passwordInput = document.getElementById('authPassword');
-  const signInButton = document.getElementById('authSignIn');
-  const signUpButton = document.getElementById('authSignUp');
-  const signOutButton = document.getElementById('authSignOut');
-  const message = document.getElementById('authMessage');
-
-  function showMessage(text) {
-    message.textContent = text;
-  }
-
-  function updateAuthUI(user) {
-    const loggedIn = Boolean(user);
-
-    emailInput.classList.toggle('hidden', loggedIn);
-    passwordInput.classList.toggle('hidden', loggedIn);
-    signInButton.classList.toggle('hidden', loggedIn);
-    signUpButton.classList.toggle('hidden', loggedIn);
-    signOutButton.classList.toggle('hidden', !loggedIn);
-
-    if (loggedIn) {
-      showMessage('Log masuk sebagai ' + user.email);
-    } else {
-      showMessage('Belum log masuk ke Sensei Cloud.');
-    }
-  }
-
-  signInButton.onclick = async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-      showMessage('Masukkan e-mel dan kata laluan.');
-      return;
-    }
-
-    signInButton.disabled = true;
-    showMessage('Sedang log masuk...');
-
-    try {
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-      if (error) throw error;
-
-      updateAuthUI(data.user);
-    } catch (error) {
-      showMessage('Log masuk gagal: ' + error.message);
-    } finally {
-      signInButton.disabled = false;
-    }
-  };
-
-  signUpButton.onclick = async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-      showMessage('Masukkan e-mel dan kata laluan.');
-      return;
-    }
-
-    if (password.length < 6) {
-      showMessage('Kata laluan mestilah sekurang-kurangnya 6 aksara.');
-      return;
-    }
-
-    signUpButton.disabled = true;
-    showMessage('Sedang mendaftar...');
-
-    try {
-      const { data, error } =
-        await supabaseClient.auth.signUp({
-          email,
-          password
-        });
-
-      if (error) throw error;
-
-      if (data.session) {
-        updateAuthUI(data.user);
-      } else {
-        showMessage(
-          'Pendaftaran diterima. Semak e-mel untuk pengesahan jika diminta.'
-        );
-      }
-    } catch (error) {
-      showMessage('Pendaftaran gagal: ' + error.message);
-    } finally {
-      signUpButton.disabled = false;
-    }
-  };
-
-  signOutButton.onclick = async () => {
-    signOutButton.disabled = true;
-
-    try {
-      const { error } = await supabaseClient.auth.signOut();
-      if (error) throw error;
-      updateAuthUI(null);
-    } catch (error) {
-      showMessage('Log keluar gagal: ' + error.message);
-    } finally {
-      signOutButton.disabled = false;
-    }
-  };
-
-  supabaseClient.auth.onAuthStateChange((_event, session) => {
-    updateAuthUI(session?.user ?? null);
-  });
-
-  supabaseClient.auth.getSession().then(({ data, error }) => {
-    if (error) {
-      showMessage('Tidak dapat menyemak sesi log masuk.');
-      return;
-    }
-
-    updateAuthUI(data.session?.user ?? null);
-  });
-}
-
-setupAuth();
-
-  init();
+init();
 </script>
 
 <script>
